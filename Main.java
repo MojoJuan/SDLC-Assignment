@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -58,6 +58,8 @@ public class Main{
         frame.getContentPane().add(BorderLayout.NORTH, mb);
         frame.getContentPane().add(BorderLayout.CENTER, textArea);
         frame.setVisible(true);
+
+    
   
 		BufferedReader bufferedReader = new BufferedReader(new FileReader("textFile.txt"));
 
@@ -98,9 +100,69 @@ public class Main{
 		for (Map.Entry<String, Integer> entry : sortedWordCounts.entrySet()) {
 
 			System.out.printf("%-20s%10s\n", entry.getKey(), entry.getValue());
-		}
-
+		
+    }
 		bufferedReader.close();
 	}
+
+  static String poem;
+  @Test
+  public void testWordChamber() {
+    int n = getStringCountInPoem("chamber");
+    Assert.assertEquals(n, 11);
+  }
+
+  @Test
+  public void testWordImplore() {
+    int n = getStringCountInPoem("implore");
+    Assert.assertEquals(n, 3);
+  }
+
+  @Test
+  public void testWordQuoth() {
+    int n = getStringCountInPoem("Quoth");
+    Assert.assertEquals(n, 5);
+  }
+
+  @Test
+  public void testWordRaven() {
+    int n = getStringCountInPoem("Raven");
+    Assert.assertEquals(n, 10);
+  }
+
+  @Test
+  public void testWordDoor() {
+    int n = getStringCountInPoem("door");
+    Assert.assertEquals(n, 14);
+  }
+
+  @Test
+  public void testWordRapping() {
+    int n = getStringCountInPoem("rapping");
+    Assert.assertEquals(n, 3);
+  }
+
+  @Test
+  public void testWordCenser() {
+    int n = getStringCountInPoem("censer");
+    Assert.assertEquals(n, 1);
+  }
+
+  @Test
+  public void testWordLamp_light() {
+    int n = getStringCountInPoem("lamp-light");
+    Assert.assertEquals(n, 3);
+  }
+
+ // it will return count from the poem that contains the count and word
+
+  public int getStringCountInPoem(String s) {
+    for (String k : poem.split("\n")) {
+      if (k.contains(s)) {
+        return Integer.parseInt(k.split(" ")[0]);
+      }
+    }
+    return 0;
+  }
 
 }
